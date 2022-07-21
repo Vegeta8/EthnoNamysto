@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Catalog</title>
+    <!-- Bootstrap core CSS -->
+</head>
+<body>
+<div th:each="item : ${itemList}">
+    <a th:text="${item.getName()}"></a>
+    <a th:text="${item.getDescription()}"></a>
+    <a th:text="${item.getPrice()}"></a>
+    <a th:text="${item.getColor()}"></a>
+</div>
+
+</body>
+</html>
