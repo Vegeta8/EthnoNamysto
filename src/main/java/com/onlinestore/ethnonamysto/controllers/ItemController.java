@@ -8,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -27,7 +28,7 @@ public class ItemController {
 
     @GetMapping()
     public String viewCatalog(Model model) {
-        logger.debug("displaying all items");
+        logger.debug("Displaying all items");
         List<ItemDto> itemDtos = itemService.allItems();
         model.addAttribute("itemList", itemDtos);
         return "catalog";
@@ -49,13 +50,33 @@ public class ItemController {
 
     @PostMapping()
     public String create(@ModelAttribute("newItem") ItemDto itemDto) {
+        logger.debug("Creating new item" + itemDto.getId());
         itemService.saveItem(itemDto);
         return "redirect:/catalog";
     }
 
-    /*@GetMapping("/{id}/edit")
+    @GetMapping("/{id}/edit")
     public String edit(Model model, @PathVariable("id") Long id) {
 
-    }*/
+        model.addAttribute("item", itemService.showItem(id));
+        return "edit";
+    }
+
+    @PostMapping ("/{id}")
+    public String update(@ModelAttribute("item") ItemDto itemDto, BindingResult bindingResult,
+                         @PathVariable("id") Long id) {
+        logger.debug("Updating item" + id);
+        if (bindingResult.hasErrors()) {
+            return "edit";
+        }
+        itemService.updateItem(itemDto, id);
+        return "redirect:/catalog";
+    }
+    @PostMapping("/{id}/delete")
+    public String delete(@PathVariable("id") Long id) {
+        logger.debug("Deleting item" + id);
+        itemService.deleteItem(id);
+        return "redirect:/catalog";
+    }
 
 }

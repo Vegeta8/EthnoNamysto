@@ -10,5 +10,6 @@ import org.springframework.stereotype.Repository;
 // Creating a repository for the ItemEntity class.
 @Repository
 public interface ItemRepository extends JpaRepository<ItemEntity,Long> {
+    ItemEntity getItemEntitiesById(Long id);
 
 }

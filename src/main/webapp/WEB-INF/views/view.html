@@ -10,5 +10,10 @@
 <p th:text="${item.getPrice()}">VALUE</p>
 <p th:text="${item.getColor()}">VALUE</p>
 
+<a th:href="@{/catalog/{id}/edit(id=${item.getId()})}">Edit</a>
+
+<form th:method="DELETE" th:action="@{/catalog/{id}/delete(id=${item.getId()})}">
+    <input type="submit" value="Delete"/>
+</form>
 </body>
 </html>

@@ -8,11 +8,15 @@
 </head>
 <body>
 <div th:each="item : ${itemList}">
-    <a th:text="${item.getName()}"></a>
-    <a th:text="${item.getDescription()}"></a>
-    <a th:text="${item.getPrice()}"></a>
-    <a th:text="${item.getColor()}"></a>
+    <a th:href="@{/catalog/{id}(id=${item.getId()})}"
+    th:text="${item.getName() + ', ' + item.getDescription() + ', '
+    + item.getColor() + ', ' + item.getPrice()}"></a>
 </div>
+
+<br/>
+<hr/>
+
+<a href="/catalog/new">Add new item</a>
 
 </body>
 </html>

@@ -6,21 +6,12 @@ package com.onlinestore.ethnonamysto.entity;
 /*
   @author Artur May
  */
-
-
-import com.sun.istack.NotNull;
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
-import org.joda.time.DateTime;
-import org.springframework.data.annotation.CreatedDate;
-import org.springframework.format.annotation.DateTimeFormat;
-
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.LocalDateTime;
-import java.util.Date;
 import java.util.Objects;
 
 @Entity
@@ -47,12 +38,10 @@ public class ItemEntity {
     private String images;
 
     @CreationTimestamp
-    @DateTimeFormat(pattern = "yyyy-MM-yyyy hh:mm:ss")
     @Column(name = "creation_time", updatable = false)
     private Timestamp creationTime;
 
     @UpdateTimestamp
-    @DateTimeFormat(pattern = "yyyy-MM-yyyy hh:mm:ss")
     @Column(name = "update_time")
     private Timestamp updateTime;
 

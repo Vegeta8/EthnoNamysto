@@ -13,6 +13,7 @@ import java.util.Optional;
 /**
  * @author Artur May
  */
+// A mapper that maps from ItemDto to ItemEntity and vice versa.
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
