@@ -6,10 +6,12 @@ package com.onlinestore.ethnonamysto.entity;
 /*
   @author Artur May
  */
+
 import lombok.*;
 import org.hibernate.Hibernate;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+
 import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
@@ -26,15 +28,12 @@ public class ItemEntity {
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "id", nullable = false)
     private Long id;
-
     private String name;
-
     private int price;
-
     private String description;
-
     private String color;
 
+    private String type;
     private String images;
 
     @CreationTimestamp

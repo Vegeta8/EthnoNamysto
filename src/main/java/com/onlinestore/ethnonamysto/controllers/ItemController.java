@@ -12,7 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Optional;
 
 /**
  * @author Artur May
@@ -62,7 +61,7 @@ public class ItemController {
         return "edit";
     }
 
-    @PostMapping ("/{id}")
+    @PostMapping("/{id}")
     public String update(@ModelAttribute("item") ItemDto itemDto, BindingResult bindingResult,
                          @PathVariable("id") Long id) {
         logger.debug("Updating item" + id);
@@ -72,6 +71,7 @@ public class ItemController {
         itemService.updateItem(itemDto, id);
         return "redirect:/catalog";
     }
+
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         logger.debug("Deleting item" + id);

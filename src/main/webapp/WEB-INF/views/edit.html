@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/catalog/{id}(id=${item.getId()})}" th:object="${item}">
+    <label for="name">Enter item name:</label>
+    <input type="text" th:field="*{name}" id="name"/>
+    <br/>
+    <label for="description">Enter item description</label>
+    <input type="text" th:field="*{description}" id="description"/>
+    <br/>
+    <label for="price">Enter item price</label>
+    <input type="number" th:field="*{price}" id="price"/>
+    <br/>
+    <label for="color">Enter item color</label>
+    <input type="text" th:field="*{color}" id="color"/>
+    <br/>
+    <input type="submit" value="Update"/>
+</form>
+</body>
+</html>

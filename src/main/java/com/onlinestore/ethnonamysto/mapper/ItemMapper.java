@@ -17,7 +17,10 @@ import java.util.Optional;
 @Mapper(componentModel = "spring")
 public interface ItemMapper {
     ItemMapper INSTANCE = Mappers.getMapper(ItemMapper.class);
-    ItemEntity toItemEntity (ItemDto itemDto);
-    ItemDto toItemDto (ItemEntity itemEntity);
+
+    ItemEntity toItemEntity(ItemDto itemDto);
+
+    ItemDto toItemDto(ItemEntity itemEntity);
+
     List<ItemDto> toItemDtos(List<ItemEntity> itemEntityList);
 }
