@@ -17,7 +17,6 @@ import java.util.List;
  * @author Artur May
  */
 @Controller
-@RequestMapping("/catalog")
 public class ItemController {
 
     private static final Logger logger = LoggerFactory.getLogger(ItemController.class);
@@ -30,7 +29,7 @@ public class ItemController {
         logger.debug("Displaying all items");
         List<ItemDto> itemDtos = itemService.allItems();
         model.addAttribute("itemList", itemDtos);
-        return "catalog";
+        return "index";
     }
 
     @GetMapping("/{id}")
@@ -43,15 +42,15 @@ public class ItemController {
 
     @GetMapping("/new")
     public String newItem(Model model) {
-        model.addAttribute("newItem", new ItemEntity());
+        model.addAttribute("newItem", new ItemDto());
         return "new";
     }
 
-    @PostMapping()
+    @PostMapping("/new")
     public String create(@ModelAttribute("newItem") ItemDto itemDto) {
         logger.debug("Creating new item" + itemDto.getId());
         itemService.saveItem(itemDto);
-        return "redirect:/catalog";
+        return "redirect:/";
     }
 
     @GetMapping("/{id}/edit")
@@ -69,14 +68,14 @@ public class ItemController {
             return "edit";
         }
         itemService.updateItem(itemDto, id);
-        return "redirect:/catalog";
+        return "redirect:" + id;
     }
 
     @PostMapping("/{id}/delete")
     public String delete(@PathVariable("id") Long id) {
         logger.debug("Deleting item" + id);
         itemService.deleteItem(id);
-        return "redirect:/catalog";
+        return "index";
     }
 
 }

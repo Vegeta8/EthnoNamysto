@@ -30,6 +30,10 @@ public class ItemEntity {
     private Long id;
     private String name;
     private int price;
+
+    private int length;
+
+    private int width;
     private String description;
     private String color;
 

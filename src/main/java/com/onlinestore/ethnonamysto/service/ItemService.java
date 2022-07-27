@@ -41,6 +41,9 @@ public class ItemService {
         itemEntity.setDescription(itemDto.getDescription());
         itemEntity.setColor(itemDto.getColor());
         itemEntity.setPrice(itemDto.getPrice());
+        itemEntity.setLength(itemDto.getLength());
+        itemEntity.setWidth(itemDto.getWidth());
+        itemEntity.setType(itemDto.getType());
         itemRepository.save(itemEntity);
     }
 
