@@ -10,6 +10,9 @@ import org.springframework.web.multipart.MultipartFile;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -26,6 +29,7 @@ public class FileService {
 
     private final String PATH = "/assets/images/itemImages/";
     private final String ABSOLUTE_PATH = "C:\\Users\\navi8\\IdeaProjects\\EthnoNamysto\\src\\main\\webapp\\assets\\images\\itemImages\\";
+    private final String ABSOLUTE_PATH_SHORTER = "C:/Users/navi8/IdeaProjects/EthnoNamysto/src/main/webapp";
 
     public void uploadMultipleFiles(MultipartFile[] multipleFiles, Map<String, String> params, ItemDto itemDto) {
         int count = 1;
@@ -34,7 +38,7 @@ public class FileService {
         /* multiple multipart files using for loop */
         for (MultipartFile multipleFile : multipleFiles) {
 
-            String name = (imageId += 1) + params.get("name") + count + ".png";
+            String name = multipleFile.getOriginalFilename() +"_"+ params.get("name") +"_"+ count + ".png";
             // Replace space in filename with underscore
             name = name.replace(' ', '_');
             // location to store the received files
@@ -75,6 +79,23 @@ public class FileService {
                 break;
             default:
                 logger.debug("Error! Should be at least 1 image and not more than 4");
+        }
+    }
+
+    public void deleteImagesFromDir(ItemEntity itemEntity) {
+        List<String> paths = new ArrayList<>();
+        paths.add(itemEntity.getMainImage());
+        paths.add(itemEntity.getExtraImage1());
+        paths.add(itemEntity.getExtraImage2());
+        paths.add(itemEntity.getExtraImage3());
+        for (String path : paths) {
+            if (path != null) {
+                try {
+                    Files.deleteIfExists(Path.of(ABSOLUTE_PATH_SHORTER + Paths.get(path)));
+                } catch (IOException e) {
+                    throw new RuntimeException(e);
+                }
+            }
         }
     }
 

@@ -22,6 +22,9 @@ public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Autowired
+    private FileService fileService;
+
     public List<ItemDto> allItems() {
         return ItemMapper.INSTANCE.toItemDtos(itemRepository.findAll());
     }
@@ -49,6 +52,7 @@ public class ItemService {
 
     public void deleteItem(Long id) {
         ItemEntity itemEntity = itemRepository.getItemEntitiesById(id);
+        fileService.deleteImagesFromDir(itemEntity);
         itemRepository.delete(itemEntity);
     }
 }

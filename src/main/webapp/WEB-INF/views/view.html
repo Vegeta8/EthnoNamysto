@@ -202,14 +202,21 @@
                             <div class="col-sm-8"><a class="btn btn-lg btn-block btn-round btn-b" href="#">Add To
                                 Cart</a></div>
                         </div>
+                        <div class="row mb-20">
+                            <div class="col-sm-4 mb-sm-20"><form th:method="DELETE" th:action="@{/{id}/delete(id=${item.getId()})}">
+                                <input type="submit" class="btn btn-lg btn-danger btn-round pull-right" value="Видалити"/>
+                            </form>
+                            </div>
+                            <div class="col-sm-8"><a class="btn btn-lg btn-block btn-round btn-b" th:href="@{/{id}/edit(id=${item.getId()})}">Редагувати</a></div>
+                        </div>
                     </div>
                 </div>
                 <div class="row mt-70">
                     <div class="col-sm-12">
                         <ul class="nav nav-tabs font-alt" role="tablist">
                             <li class="active"><a href="#description" data-toggle="tab"><span
-                                    class="icon-tools-2"></span>Description</a></li>
-                            <li><a href="#data-sheet" data-toggle="tab"><span class="icon-tools-2"></span>Data sheet</a>
+                                    class="icon-tools-2"></span>Опис</a></li>
+                            <li><a href="#data-sheet" data-toggle="tab"><span class="icon-tools-2"></span>Характеристики</a>
                             </li>
                         </ul>
                         <div class="tab-content">

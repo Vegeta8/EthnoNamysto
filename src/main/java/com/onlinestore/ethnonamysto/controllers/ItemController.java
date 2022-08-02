@@ -83,7 +83,7 @@ public class ItemController {
     public String delete(@PathVariable("id") Long id) {
         logger.debug("Deleting item" + id);
         itemService.deleteItem(id);
-        return "index";
+        return "redirect:/";
     }
 
 }
