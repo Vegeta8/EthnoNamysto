@@ -38,7 +38,14 @@ public class ItemEntity {
     private String color;
 
     private String type;
-    private String images;
+
+    private String mainImage;
+
+    private String extraImage1;
+
+    private String extraImage2;
+
+    private String extraImage3;
 
     @CreationTimestamp
     @Column(name = "creation_time", updatable = false)
@@ -69,7 +76,6 @@ public class ItemEntity {
                 ", price=" + price +
                 ", description='" + description + '\'' +
                 ", color='" + color + '\'' +
-                ", images='" + images + '\'' +
                 '}';
     }
 }

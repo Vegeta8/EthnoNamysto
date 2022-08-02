@@ -1,9 +1,9 @@
 package com.onlinestore.ethnonamysto.dto;
 
-import com.onlinestore.ethnonamysto.entity.ItemEntity;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.util.List;
 
 /*
   @author Artur May
@@ -19,7 +19,11 @@ public class ItemDto implements Serializable {
     private int price;
     private String description;
     private String color;
-    private Byte images;
+    private List<String> images;
+    private String mainImage;
+    private String extraImage1;
+    private String extraImage2;
+    private String extraImage3;
     private String type;
     private int length;
     private int width;

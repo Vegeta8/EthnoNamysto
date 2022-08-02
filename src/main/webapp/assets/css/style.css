@@ -2928,6 +2928,10 @@ Google map
 }
 /*new*/
 
+.item-photo__preview {
+  width: 150px;
+  height: 150px;
+}
 
 
 

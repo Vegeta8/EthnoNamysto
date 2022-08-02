@@ -156,7 +156,7 @@
                     <div class="col-sm-8 col-sm-offset-2">
                         <h4 class="font-alt mb-0">Поля для створення нового товару</h4>
                         <hr class="divider-w mt-10 mb-20">
-                        <form th:method="POST" th:action="@{/new}" th:object="${newItem}" class="form" role="form">
+                        <form th:method="POST" th:action="@{/new}" enctype="multipart/form-data" th:object="${newItem}" class="form" role="form">
                             <div class="form-group">
                                 <label for="name">Назва</label>
                                 <input class="form-control input-lg" type="text" th:field="*{name}" id="name"/>
@@ -180,6 +180,11 @@
                                     <option th:value="Сережки" th:text="Сережки"></option>
                                     <option th:value="Браслет" th:text="Браслет"></option>
                                 </select>
+
+                                <label for="files">Завантажити фото</label>
+                                <input class="form-control input-lg" name="files" type="file" multiple="multiple"
+                                       accept="image/png, image/gif, image/jpeg" th:value="*{images}" id="files"/>
+                                <div id="photo-upload__preview" class="upload-preview"></div>
 
                                 <label for="description">Опис</label>
                                 <textarea class="form-control" rows="7" th:field="*{description}" id="description"

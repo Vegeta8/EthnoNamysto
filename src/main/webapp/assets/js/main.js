@@ -848,6 +848,11 @@ console.log('%c Proudly Crafted with ZiOn.', 'background: #222; color: #bada55')
     });
 })(jQuery);
 
+/**
+ * When the user clicks on a thumbnail, the function will get the source of the thumbnail and set it as the source of the
+ * expanded image
+ * @param imgs - The image that was clicked on.
+ */
 function transitSrc(imgs) {
     // Get the expanded image
     var expandImg = document.getElementById("expandedImg");
@@ -865,8 +870,34 @@ function transitSrc(imgs) {
     expandImg.parentElement.style.display = "block";
 
 }
+/**
+ * If the event has a preventDefault method, call it.
+ * @param event - The event object.
+ */
 function prevent(event) {
     event.preventDefault();
 }
+
+function previewImage(e, selectedFiles, imagesArray) {
+    const elemContainer = document.createElement('div');
+    elemContainer.setAttribute('class', 'item-images');
+    for (let i = 0; i < selectedFiles.length; i++) {
+        imagesArray.push(selectedFiles[i]);
+        const imageContainer = document.createElement('div');
+        const elem = document.createElement('img');
+        elem.setAttribute('src', URL.createObjectURL(selectedFiles[i]));
+        elem.setAttribute('class', 'item-photo__preview')
+        imageContainer.appendChild(elem);
+        elemContainer.appendChild(imageContainer);
+    }
+    return elemContainer;
+}
+let item_images = [];
+document.getElementById('files').addEventListener('change', (e) => {
+    let selectedFiles = e.target.files;
+    const photoPreviewContainer = document.querySelector('#photo-upload__preview');
+    const elemContainer = previewImage(e, selectedFiles, item_images);
+    photoPreviewContainer.appendChild(elemContainer);
+});
 
 

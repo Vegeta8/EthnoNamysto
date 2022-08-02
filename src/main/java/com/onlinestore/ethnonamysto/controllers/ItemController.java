@@ -1,7 +1,7 @@
 package com.onlinestore.ethnonamysto.controllers;
 
 import com.onlinestore.ethnonamysto.dto.ItemDto;
-import com.onlinestore.ethnonamysto.entity.ItemEntity;
+import com.onlinestore.ethnonamysto.service.FileService;
 import com.onlinestore.ethnonamysto.service.ItemService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +12,10 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
+
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @author Artur May
@@ -23,6 +27,9 @@ public class ItemController {
 
     @Autowired
     private ItemService itemService;
+
+    @Autowired
+    private FileService fileService;
 
     @GetMapping()
     public String viewCatalog(Model model) {
@@ -47,8 +54,9 @@ public class ItemController {
     }
 
     @PostMapping("/new")
-    public String create(@ModelAttribute("newItem") ItemDto itemDto) {
+    public String create(@ModelAttribute("newItem") ItemDto itemDto, @RequestParam("files") MultipartFile[] files, @RequestParam Map<String, String> params) {
         logger.debug("Creating new item" + itemDto.getId());
+        fileService.uploadMultipleFiles(files, params, itemDto);
         itemService.saveItem(itemDto);
         return "redirect:/";
     }

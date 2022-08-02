@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en-US" dir="ltr">
+<html lang="en-US" dir="ltr" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -152,22 +152,26 @@
                 </ul>-->
 
                         <div class="gallery">
-                            <a id="viewFullImg" href="https://picsum.photos/id/1060/536/354?blur=2">
-                                <img id="expandedImg" src="https://picsum.photos/id/1060/536/354?blur=2"
+                            <a id="viewFullImg" th:href="${item.getMainImage()}">
+                                <img id="expandedImg" th:src="${item.getMainImage()}"
                                      style="width:90%">
                             </a>
                         </div>
                         <ul class="product-gallery">
-                            <li><a href="https://picsum.photos/id/870/536/354?grayscale&blur=2"
+                            <li><a th:href="${item.getMainImage()}"
                                    onclick="prevent(event)"> <img
-                                    src="https://picsum.photos/id/870/536/354?grayscale&blur=2"
+                                    th:src="${item.getMainImage()}"
                                     onclick="transitSrc(this);"></a></li>
-                            <li><a href="https://picsum.photos/id/1060/536/354?blur=2" onclick="prevent(event)"> <img
-                                    src="https://picsum.photos/id/1060/536/354?blur=2" onclick="transitSrc(this);"></a>
-                            </li>
-                            <li><a href="https://picsum.photos/id/870/536/354?grayscale&blur=2"
+                            <li><a th:href="${item.getExtraImage1()}"
                                    onclick="prevent(event)"> <img
-                                    src="https://picsum.photos/id/870/536/354?grayscale&blur=2"
+                                    th:src="${item.getExtraImage1()}"
+                                    onclick="transitSrc(this);"></a></li>
+                            <li><a th:href="${item.getExtraImage2()}" onclick="prevent(event)"> <img
+                                    th:src="${item.getExtraImage2()}" onclick="transitSrc(this);"></a>
+                            </li>
+                            <li><a th:href="${item.getExtraImage3()}"
+                                   onclick="prevent(event)"> <img
+                                    th:src="${item.getExtraImage3()}"
                                     onclick="transitSrc(this);"></a></li>
                         </ul>
                     </div>
