@@ -1,7 +1,7 @@
 package com.onlinestore.ethnonamysto.service;
 
 import com.onlinestore.ethnonamysto.dto.ItemDto;
-import com.onlinestore.ethnonamysto.entity.ItemEntity;
+import com.onlinestore.ethnonamysto.entity.Item;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -82,12 +82,12 @@ public class FileService {
         }
     }
 
-    public void deleteImagesFromDir(ItemEntity itemEntity) {
+    public void deleteImagesFromDir(Item item) {
         List<String> paths = new ArrayList<>();
-        paths.add(itemEntity.getMainImage());
-        paths.add(itemEntity.getExtraImage1());
-        paths.add(itemEntity.getExtraImage2());
-        paths.add(itemEntity.getExtraImage3());
+        paths.add(item.getMainImage());
+        paths.add(item.getExtraImage1());
+        paths.add(item.getExtraImage2());
+        paths.add(item.getExtraImage3());
         for (String path : paths) {
             if (path != null) {
                 try {

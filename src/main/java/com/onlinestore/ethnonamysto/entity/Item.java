@@ -22,7 +22,7 @@ import java.util.Objects;
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "items")
-public class ItemEntity {
+public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -59,8 +59,8 @@ public class ItemEntity {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || Hibernate.getClass(this) != Hibernate.getClass(o)) return false;
-        ItemEntity itemEntity = (ItemEntity) o;
-        return id != null && Objects.equals(id, itemEntity.id);
+        Item item = (Item) o;
+        return id != null && Objects.equals(id, item.id);
     }
 
     @Override
@@ -70,7 +70,7 @@ public class ItemEntity {
 
     @Override
     public String toString() {
-        return "ItemEntity{" +
+        return "Item{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", price=" + price +

@@ -1,14 +1,17 @@
 package com.onlinestore.ethnonamysto.service;
 
-import com.onlinestore.ethnonamysto.entity.UserEntity;
+import com.onlinestore.ethnonamysto.entity.User;
+import com.onlinestore.ethnonamysto.entity.ConfirmationToken;
 import com.onlinestore.ethnonamysto.repository.UserRepository;
 import lombok.AllArgsConstructor;
-import lombok.NoArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import java.time.LocalDateTime;
+import java.util.UUID;
 
 /**
  * Created by Artur May
@@ -23,7 +26,7 @@ public class UserService implements UserDetailsService {
     private final static String USER_NOT_FOUND_MSG = "User with email %s not found";
     private final UserRepository userRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
-
+    private final ConfirmationTokenService confirmationTokenService;
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
@@ -33,21 +36,31 @@ public class UserService implements UserDetailsService {
                                 String.format(USER_NOT_FOUND_MSG, email)));
     }
 
-    public String signUpUser(UserEntity userEntity) {
-        boolean userExist = userRepository.findByEmail(userEntity.getEmail())
+    public String signUpUser(User user) {
+        boolean userExist = userRepository.findByEmail(user.getEmail())
                 .isPresent();
         if (userExist) {
             throw new IllegalStateException("email already taken");
         }
 
-        String encodedPassword = bCryptPasswordEncoder.encode(userEntity.getPassword());
+        String encodedPassword = bCryptPasswordEncoder.encode(user.getPassword());
 
-        userEntity.setPassword(encodedPassword);
+        user.setPassword(encodedPassword);
 
-        userRepository.save(userEntity);
+        userRepository.save(user);
 
-        //TODO: Send confirmation token
-        return "it works";
+        String token = UUID.randomUUID().toString();
+        ConfirmationToken confirmationToken = new ConfirmationToken(token, LocalDateTime.now(),
+                LocalDateTime.now().plusMinutes(15), user);
+        confirmationTokenService.saveConfirmationToken(confirmationToken);
+
+        //TODO:Send email
+
+        return token;
+    }
+
+    public int enableUser(String email) {
+        return userRepository.enableUser(email);
     }
 
 }

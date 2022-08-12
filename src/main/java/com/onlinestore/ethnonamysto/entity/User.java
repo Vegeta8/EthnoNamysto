@@ -23,7 +23,7 @@ import java.util.Collections;
 @NoArgsConstructor
 @Entity
 @Table(name = "Users")
-public class UserEntity implements UserDetails {
+public class User implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,10 +34,10 @@ public class UserEntity implements UserDetails {
     private String password;
     @Enumerated(EnumType.STRING)
     private UserRole userRole;
-    private Boolean locked;
-    private Boolean enabled;
+    private Boolean locked = false;
+    private Boolean enabled = false;
 
-    public UserEntity(String firstName, String lastname, String email, String password, UserRole userRole) {
+    public User(String firstName, String lastname, String email, String password, UserRole userRole) {
         this.firstName = firstName;
         this.lastname = lastname;
         this.email = email;
