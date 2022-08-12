@@ -38,7 +38,7 @@ public class FileService {
         /* multiple multipart files using for loop */
         for (MultipartFile multipleFile : multipleFiles) {
 
-            String name = multipleFile.getOriginalFilename() +"_"+ params.get("name") +"_"+ count + ".png";
+            String name = multipleFile.getOriginalFilename() + "_" + params.get("name") + "_" + count + ".png";
             // Replace space in filename with underscore
             name = name.replace(' ', '_');
             // location to store the received files
