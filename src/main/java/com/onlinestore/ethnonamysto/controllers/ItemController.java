@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author Artur May
  */
-@RestController
+@Controller
 public class ItemController {
 
     private static final Logger logger = LoggerFactory.getLogger(ItemController.class);

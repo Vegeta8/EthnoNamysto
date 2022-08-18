@@ -7,6 +7,7 @@ import com.onlinestore.ethnonamysto.registration.EmailValidator;
 import com.onlinestore.ethnonamysto.registration.RegistrationRequest;
 import com.onlinestore.ethnonamysto.util.EmailBuilder;
 import lombok.AllArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +26,7 @@ public class RegistrationService {
     private EmailValidator emailValidator;
     private final ConfirmationTokenService confirmationTokenService;
     private final EmailSender emailSender;
+    @Autowired
     private final EmailBuilder emailBuilder;
 
     public String register(RegistrationRequest request) {

@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import javax.mail.MessagingException;
 import javax.mail.internet.MimeMessage;
+import java.io.UnsupportedEncodingException;
 
 /**
  * Created by Artur May
@@ -33,11 +34,13 @@ public class EmailService implements EmailSender {
             helper.setText(email, true);
             helper.setTo(to);
             helper.setSubject("Confirm your email");
-            helper.setFrom("artur.may96@gmail.com"); //TODO:Add static variable
+            helper.setFrom("etno.namysto@gmail.com", "Ehtno Namysto"); //TODO:Add static variable
             mailSender.send(message);
         } catch (MessagingException e) {
             logger.error("failed to send email", e);
             throw new IllegalStateException("failed to send email");
+        } catch (UnsupportedEncodingException e) {
+            throw new RuntimeException(e);
         }
     }
 }
