@@ -15,12 +15,19 @@ import java.util.Optional;
  * Time 17:31
  */
 
+// A repository for the User entity.
 @Repository
 @Transactional(readOnly = true)
 public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByEmail(String email);
 
+    /**
+     * Enable a user by email.
+     *
+     * @param email the email of the user to be enabled
+     * @return The number of rows affected by the update.
+     */
     @Transactional
     @Modifying
     @Query("UPDATE User a " +

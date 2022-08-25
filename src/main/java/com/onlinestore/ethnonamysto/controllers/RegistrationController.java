@@ -17,7 +17,10 @@ import java.util.List;
  * Date 12.08.2022
  * Time 17:44
  */
-@RestController
+/**
+ * This class is a Spring MVC controller that handles requests to the `/registration` endpoint.
+ */
+@Controller
 @RequestMapping(path ="/registration")
 @AllArgsConstructor
 public class RegistrationController {
@@ -26,15 +29,9 @@ public class RegistrationController {
 
     private RegistrationService registrationService;
 
-    @GetMapping()
-    public String loginPage() {
-        logger.debug("Logging");
-
-        return "index";
-    }
-
     @PostMapping
-    public String register(@RequestBody RegistrationRequest request) {
+    @ResponseBody
+    public String register(RegistrationRequest request) {
         return registrationService.register(request);
     }
 

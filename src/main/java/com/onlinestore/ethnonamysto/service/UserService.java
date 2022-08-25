@@ -19,6 +19,9 @@ import java.util.UUID;
  * Time 17:28
  */
 
+/**
+ * It implements the UserDetailsService interface and overrides the loadUserByUsername() method
+ */
 @Service
 @AllArgsConstructor
 public class UserService implements UserDetailsService {
@@ -36,6 +39,13 @@ public class UserService implements UserDetailsService {
                                 String.format(USER_NOT_FOUND_MSG, email)));
     }
 
+    /**
+     * It creates a new user, saves it to the database, creates a confirmation token, saves the token to the database, and
+     * returns the token
+     *
+     * @param user The user object that is passed in from the frontend.
+     * @return A token
+     */
     public String signUpUser(User user) {
         boolean userExist = userRepository.findByEmail(user.getEmail())
                 .isPresent();

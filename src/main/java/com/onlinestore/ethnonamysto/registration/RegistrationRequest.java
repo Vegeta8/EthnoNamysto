@@ -11,6 +11,9 @@ import lombok.ToString;
  * Time 18:01
  */
 
+/**
+ * It's a data transfer object (DTO) that represents a request to register a new user
+ */
 @Getter
 @AllArgsConstructor
 @EqualsAndHashCode

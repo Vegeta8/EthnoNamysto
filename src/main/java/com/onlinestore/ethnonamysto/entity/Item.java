@@ -16,6 +16,9 @@ import javax.persistence.*;
 import java.sql.Timestamp;
 import java.util.Objects;
 
+/**
+ * This class is a JPA entity that represents a row in the `items` table.
+ */
 @Entity
 @Getter
 @Setter

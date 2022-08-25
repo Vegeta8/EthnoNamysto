@@ -14,6 +14,9 @@ import java.time.LocalDateTime;
  * Time 22:26
  */
 
+/**
+ * It's a class that represents a confirmation token that is sent to a user's email address when they register
+ */
 @Getter
 @Setter
 @NoArgsConstructor

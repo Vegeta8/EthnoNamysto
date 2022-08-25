@@ -7,6 +7,8 @@ import com.onlinestore.ethnonamysto.registration.EmailValidator;
 import com.onlinestore.ethnonamysto.registration.RegistrationRequest;
 import com.onlinestore.ethnonamysto.util.EmailBuilder;
 import lombok.AllArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,7 +22,12 @@ import java.time.LocalDateTime;
  */
 @Service
 @AllArgsConstructor
+/**
+ * > This class is responsible for registering a user
+ */
 public class RegistrationService {
+
+    private static final Logger logger = LoggerFactory.getLogger(RegistrationService.class);
 
     private final UserService userService;
     private EmailValidator emailValidator;
@@ -29,9 +36,16 @@ public class RegistrationService {
     @Autowired
     private final EmailBuilder emailBuilder;
 
+    /**
+     * "This function registers a user and sends an email to the user."
+     *
+     * @param request the request object that contains the user's first name, last name, email, and password.
+     * @return A token
+     */
     public String register(RegistrationRequest request) {
         boolean isValidEmail = emailValidator.test(request.getEmail());
         if (!isValidEmail) {
+            logger.error("email {} not valid", request.getEmail());
             throw new IllegalStateException("email not valid");
         }
         String token = userService.signUpUser(new User(request.getFirstname(), request.getLastname(), request.getEmail(),
@@ -42,6 +56,12 @@ public class RegistrationService {
         return token;
     }
 
+    /**
+     * It confirms the token and enables the user
+     *
+     * @param token The token that was sent to the user's email address.
+     * @return A string
+     */
     @Transactional
     public String confirmToken(String token) {
         ConfirmationToken confirmationToken = confirmationTokenService
@@ -50,18 +70,21 @@ public class RegistrationService {
                         new IllegalStateException("token not found"));
 
         if (confirmationToken.getConfirmedAt() != null) {
+            logger.error("email already confirmed");
             throw new IllegalStateException("email already confirmed");
         }
 
         LocalDateTime expiredAt = confirmationToken.getExpiresAt();
 
         if (expiredAt.isBefore(LocalDateTime.now())) {
+            logger.error("token expired");
             throw new IllegalStateException("token expired");
         }
 
         confirmationTokenService.setConfirmedAt(token);
         userService.enableUser(
                 confirmationToken.getUser().getEmail());
+        logger.debug("Token confirmed");
         return "confirmed";
     }
 }

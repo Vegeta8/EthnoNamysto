@@ -12,10 +12,14 @@ import java.util.Properties;
  * Date 14.08.2022
  * Time 14:32
  */
+/**
+ * It's a Spring configuration class that configures a JavaMailSender bean.
+ */
 @Configuration
 public class MailConfig {
 
     @Bean
+    // A bean that is used to send emails.
     public JavaMailSender javaMailService() {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
 

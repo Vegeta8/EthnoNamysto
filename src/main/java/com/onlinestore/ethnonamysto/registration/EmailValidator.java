@@ -9,6 +9,9 @@ import java.util.function.Predicate;
  * Date 12.08.2022
  * Time 21:14
  */
+/**
+ * This class is a service that validates emails.
+ */
 @Service
 public class EmailValidator implements Predicate<String> {
     @Override

@@ -19,29 +19,53 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @AllArgsConstructor
 @EnableWebSecurity
+
+/**
+ * > This class is used to configure the security of the application
+ */
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
     private final UserService userService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     //TODO upgrade the Deprecated WebSecurityConfigurerAdapter
+    /**
+     * If the user is not authenticated, then redirect to the login page. Otherwise, allow access to the requested
+     * resource.
+     *
+     * @param http This is the main object that contains all the configuration.
+     */
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .csrf().disable()
                 .authorizeRequests()
-                .antMatchers("/registration/**")
+                .antMatchers( "/", "/registration/**", "/assets/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated().and()
-                .formLogin();
+                .formLogin().loginPage("/login").permitAll()
+                .defaultSuccessUrl("/", true);
     }
 
+    /**
+     * "This function is called by the Spring Security framework to configure the authentication manager.
+     * The authentication manager is responsible for authenticating users.
+     * The authentication manager is configured to use the DAO authentication provider."
+     *
+     * @param auth This is the AuthenticationManagerBuilder object that is used to create an AuthenticationManager object.
+     */
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(daoAuthenticationProvider());
     }
 
+    /**
+     * This function creates a DaoAuthenticationProvider object, sets the password encoder to be the bCryptPasswordEncoder
+     * object, and sets the user details service to be the userService object.
+     *
+     * @return A DaoAuthenticationProvider object.
+     */
     @Bean
     public DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();

@@ -17,6 +17,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
  * Time 18:06
  */
 
+/**
+ * This class is a Spring configuration class that configures a BCryptPasswordEncoder bean.
+ */
 @Configuration
 public class PasswordEncoder {
 

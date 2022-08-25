@@ -20,6 +20,9 @@ import org.springframework.web.multipart.MultipartFile;
 /**
  * @author Artur May
  */
+/**
+ * > This class is a Spring MVC controller that handles requests for the `/items` endpoint
+ */
 @Controller
 public class ItemController {
 

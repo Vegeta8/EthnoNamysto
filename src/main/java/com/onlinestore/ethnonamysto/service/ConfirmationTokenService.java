@@ -13,6 +13,10 @@ import java.util.Optional;
  * Date 12.08.2022
  * Time 23:53
  */
+/**
+ * It's a service class that
+ * provides methods to save, get, and update a confirmation token
+ */
 @Service
 @AllArgsConstructor
 public class ConfirmationTokenService {

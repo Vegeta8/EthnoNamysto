@@ -22,6 +22,9 @@ import java.util.Map;
  * Date 29.07.2022
  * Time 15:23
  */
+/**
+ * It uploads files to the server and deletes them when needed
+ */
 @Service
 public class FileService {
 

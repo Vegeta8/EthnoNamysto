@@ -17,6 +17,9 @@ import java.io.UnsupportedEncodingException;
  * Date 13.08.2022
  * Time 0:44
  */
+/**
+ * It's a Spring @Service that sends emails asynchronously using Spring's @Async annotation
+ */
 @Service
 @AllArgsConstructor
 public class EmailService implements EmailSender {

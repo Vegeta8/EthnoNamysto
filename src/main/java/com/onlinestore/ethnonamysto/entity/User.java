@@ -17,6 +17,9 @@ import java.util.Collections;
  * Date 12.08.2022
  * Time 17:02
  */
+/**
+ * It's a JPA entity that implements the UserDetails interface
+ */
 @Getter
 @Setter
 @EqualsAndHashCode

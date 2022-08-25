@@ -14,6 +14,9 @@ import java.util.List;
 /**
  * @author Artur May
  */
+/**
+ * It's a service class that contains methods for CRUD operations on the Item entity
+ */
 @Service
 public class ItemService {
 
